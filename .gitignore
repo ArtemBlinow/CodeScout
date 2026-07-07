@@ -1,19 +1,158 @@
-# Dependencies
-node_modules/
+# ============================================
+# ЗАВИСИМОСТИ И ПАКЕТНЫЕ МЕНЕДЖЕРЫ
+# ============================================
 
-# Environment
+# Директории зависимостей
+node_modules/
+jspm_packages/
+bower_components/
+web_modules/
+
+# Логи
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Диагностические отчёты Node.js
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# ============================================
+# ФАЙЛЫ ВРЕМЕННЫХ ДАННЫХ
+# ============================================
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Директория для инструментированных библиотек (jscoverage/JSCover)
+lib-cov
+
+# Покрытие кода (coverage)
+coverage/
+*.lcov
+.nyc_output
+
+# ============================================
+# КЭШИ РАЗЛИЧНЫХ ИНСТРУМЕНТОВ
+# ============================================
+
+# Grunt
+.grunt
+
+# node-waf
+.lock-wscript
+
+# TypeScript
+*.tsbuildinfo
+
+# npm
+.npm
+
+# ESLint
+.eslintcache
+
+# Stylelint
+.stylelintcache
+
+# REPL история
+.node_repl_history
+
+# Yarn
+.yarn-integrity
+.pnp.*
+.yarn/
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# parcel-bundler
+.cache
+.parcel-cache
+
+# Next.js
+.next
+out
+
+# Nuxt.js
+.nuxt
+dist
+.output
+
+# Gatsby
+.cache/
+# Раскомментируйте строку ниже, если используете Gatsby, а не Next.js
+# public
+
+# Vuepress
+.vuepress/dist
+.temp
+
+# Sveltekit
+.svelte-kit/
+
+# Vitepress
+**/.vitepress/dist
+**/.vitepress/cache
+
+# Docusaurus
+.docusaurus
+
+# Serverless
+.serverless/
+
+# FuseBox
+.fusebox/
+
+# DynamoDB Local
+.dynamodb/
+
+# Firebase
+.firebase/
+
+# TernJS
+.tern-port
+
+# VSCode тестирование
+.vscode-test
+
+# pnpm
+.pnpm-store
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+.vite/
+
+# ============================================
+# ПЕРЕМЕННЫЕ ОКРУЖЕНИЯ
+# ============================================
+
 .env
 .env.*
 !.env.example
 
-# Logs
-logs/
-*.log
-npm-debug.log*
+# ============================================
+# СБОРКА И КОМПИЛЯЦИЯ
+# ============================================
 
-# Build output
+# Скомпилированные бинарные аддоны Node.js
+build/Release
+
+# Сборка
 dist/
 build/
+.output
+
+# ============================================
+# СРЕДЫ РАЗРАБОТКИ И IDE
+# ============================================
 
 # IDE
 .idea/
@@ -21,11 +160,21 @@ build/
 *.swp
 *.swo
 
-# OS
+# ============================================
+# ОПЕРАЦИОННЫЕ СИСТЕМЫ
+# ============================================
+
+# macOS
 .DS_Store
+
+# Windows
 Thumbs.db
 
-# Database (секреты пользователей!)
+# ============================================
+# ДАННЫЕ ПРОЕКТА (ВАШИ СПЕЦИФИЧНЫЕ ИСКЛЮЧЕНИЯ)
+# ============================================
+
+# База данных (секреты пользователей!)
 data/accounts.db
 data/*.db
 
@@ -34,12 +183,17 @@ data/gyms.json
 workouts/gyms/
 workouts/gyms.json
 
-# Python
+# ============================================
+# PYTHON
+# ============================================
+
 venv/
 .venv/
 __pycache__/
 *.pyc
 
-# Misc
+# ============================================
+# РАЗНОЕ
+# ============================================
+
 *.tgz
-coverage/
