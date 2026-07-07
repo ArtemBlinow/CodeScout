@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <!-- Градиент для фона (светлый и сочный) -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4facfe"/>
+      <stop offset="100%" stop-color="#00f2fe"/>
+    </linearGradient>
+    <!-- Легкая тень для объема -->
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000025"/>
+    </filter>
+  </defs>
+
+  <!-- Круглый фон -->
+  <circle cx="32" cy="32" r="30" fill="url(#bgGrad)" filter="url(#shadow)"/>
+
+  <!-- Белое кольцо лупы -->
+  <circle cx="27" cy="27" r="11.5" fill="none" stroke="#ffffff" stroke-width="4.5"/>
+  
+  <!-- Внутренняя подсветка (блик) -->
+  <circle cx="27" cy="27" r="11.5" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- Белая ручка лупы -->
+  <line x1="35" y1="35" x2="48" y2="48" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round"/>
+
+  <!-- Внутренняя точка-акцент в центре лупы -->
+  <circle cx="24" cy="24" r="3" fill="#ffffff" opacity="0.8"/>
+</svg>

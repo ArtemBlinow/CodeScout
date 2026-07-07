@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск контестов Codeforces</title>
+    <link rel="icon" type="image/svg+xml" href="assetes/logo.svg">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/findcontest.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- ====== ШАПКА ====== -->
+        <div class="header">
+            <h1 class="page-title">Поиск контестов</h1>
+            <button class="btn btn-secondary" id="account-btn">
+                <span>👤</span> Аккаунт
+            </button>
+        </div>
+
+        <!-- ====== ФОРМАТ (ICPC / IOI) ====== -->
+        <div class="section-card">
+            <h2 class="section-title">Формат</h2>
+            <div class="toggle-group" id="contest-format">
+                <button class="toggle-btn active" data-value="ICPC">ICPC</button>
+                <button class="toggle-btn" data-value="IOI">IOI</button>
+            </div>
+        </div>
+
+        <!-- ====== СЛОЖНОСТЬ ====== -->
+        <div class="section-card">
+            <div class="section-header-row">
+                <h2 class="section-title">Сложность</h2>
+                <div class="toggle-group toggle-sm" id="difficulty-scale">
+                    <button class="toggle-btn active" data-value="stars">Звёзды</button>
+                    <button class="toggle-btn" data-value="relative">Относительная</button>
+                </div>
+            </div>
+
+            <!-- ЗВЁЗДНАЯ ШКАЛА -->
+            <div class="scale-panel" id="scale-stars">
+                <div class="range-container">
+                    <div class="range-labels">
+                        <span>⭐ 1</span>
+                        <span>⭐ 2</span>
+                        <span>⭐ 3</span>
+                        <span>⭐ 4</span>
+                        <span>⭐ 5</span>
+                    </div>
+                    <input type="range" id="difficulty-slider" min="1" max="5" value="3" step="1"
+                        class="range-slider stars-slider" />
+                </div>
+            </div>
+
+            <!-- ОТНОСИТЕЛЬНАЯ ШКАЛА -->
+            <div class="scale-panel" id="scale-relative" style="display: none;">
+                <div class="range-container">
+                    <div class="range-labels relative-labels">
+                        <span>Изи</span>
+                        <span></span>
+                        <span>Золотая середина</span>
+                        <span></span>
+                        <span>Гробы</span>
+                    </div>
+                    <input type="range" id="relative-slider" min="1" max="30" value="15" step="1"
+                        class="range-slider relative-slider" />
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== ДЛИТЕЛЬНОСТЬ ====== -->
+        <div class="section-card">
+            <h2 class="section-title">Длительность</h2>
+            <div class="range-container">
+                <div class="range-labels">
+                    <span>1 час</span>
+                    <span>2 часа</span>
+                    <span>3 часа</span>
+                    <span>4 часа</span>
+                    <span>5 часов</span>
+                </div>
+                <input type="range" id="duration-slider" min="1" max="5" value="5" step="1" class="range-slider" />
+            </div>
+        </div>
+
+        <!-- ====== ТИП СОРЕВНОВАНИЯ ====== -->
+        <div class="section-card">
+            <h2 class="section-title">Тип соревнования</h2>
+            <div class="contest-types">
+                <label class="type-option">
+                    <input type="radio" name="contest-type" value="official-icpc" checked />
+                    <span>Официальное соревнование ICPC</span>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="contest-type" value="official-school" />
+                    <span>Официальное школьное соревнование</span>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="contest-type" value="open-cup" />
+                    <span>Этап открытого кубка</span>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="contest-type" value="championship" />
+                    <span>Чемпионат школы / университета / города / области</span>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="contest-type" value="training-camp" />
+                    <span>Соревнование со сборов</span>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="contest-type" value="official-individual" />
+                    <span>Официальное международное индивидуальное соревнование</span>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="contest-type" value="training" />
+                    <span>Тренировочное соревнование</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- ====== КНОПКА ====== -->
+        <button class="btn btn-primary btn-wide" id="search-contests-btn">
+            <span>🔍</span> Найти контесты
+        </button>
+
+        <!-- ====== РЕЗУЛЬТАТЫ ====== -->
+        <div id="results-section" style="display: none;">
+            <div class="results-container" id="results-container"></div>
+        </div>
+    </div>
+
+    <!-- Плейсхолдер для модалки -->
+    <div id="modal-placeholder"></div>
+
+    <!-- ====== СКРИПТЫ ====== -->
+    <script src="/js/common.js"></script>
+    <script src="/js/findcontest.js"></script>
+</body>
+
+</html>

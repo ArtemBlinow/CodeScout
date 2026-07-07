@@ -1,0 +1,151 @@
+<!-- ============================================================ -->
+<!-- MODAL: ACCOUNT -->
+<!-- ============================================================ -->
+<div class="modal-overlay" id="modal-overlay" style="display: none;">
+    <div class="modal modal-account">
+        <!-- HEADER -->
+        <div class="modal-header">
+            <h2 id="modal-title">Аккаунт</h2>
+            <button class="modal-close" id="modal-close">&times;</button>
+        </div>
+
+        <!-- BODY -->
+        <div class="modal-body">
+            <!-- ====================================================== -->
+            <!-- AUTH VIEW (GUEST) -->
+            <!-- ====================================================== -->
+            <div id="auth-view">
+                <div class="modal-tabs">
+                    <button class="modal-tab active" data-tab="login">Вход</button>
+                    <button class="modal-tab" data-tab="register">Регистрация</button>
+                </div>
+
+                <!-- LOGIN -->
+                <div id="login-form">
+                    <div class="form-fields">
+                        <div class="input-wrapper">
+                            <label>Логин</label>
+                            <input id="modal-login" placeholder="username" />
+                        </div>
+                        <div class="input-wrapper">
+                            <label>Пароль</label>
+                            <input id="modal-password" type="password" placeholder="••••••••" />
+                        </div>
+                        <button class="btn btn-primary btn-wide" id="modal-login-btn">Войти</button>
+                    </div>
+                </div>
+
+                <!-- REGISTER -->
+                <div id="register-form" style="display:none;">
+                    <div class="form-fields">
+                        <div class="input-wrapper">
+                            <label>Логин</label>
+                            <input id="modal-reg-login" placeholder="username" />
+                        </div>
+                        <div class="input-wrapper">
+                            <label>Пароль</label>
+                            <input id="modal-reg-password" type="password" placeholder="••••••••" />
+                        </div>
+                        <div class="input-wrapper">
+                            <label>Codeforces handle</label>
+                            <input id="modal-reg-handle" placeholder="tourist" />
+                        </div>
+                        <button class="btn btn-primary btn-wide" id="modal-register-btn">Создать аккаунт</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====================================================== -->
+            <!-- ACCOUNT VIEW (LOGGED IN) -->
+            <!-- ====================================================== -->
+            <div id="account-view" style="display:none;">
+
+                <!-- ИНФО АККАУНТА -->
+                <div class="account-section-block">
+                    <div class="account-card">
+                        <div class="account-header">
+                            <div class="account-info">
+                                <div class="account-name" id="account-login">user</div>
+                                <div class="account-meta" id="account-meta">Codeforces аккаунт</div>
+                            </div>
+                            <span id="api-keys-status" class="status-badge">нет</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- НАСТРОЙКИ ПРОФИЛЯ -->
+                <div class="account-section-block">
+                    <div class="profile-settings">
+                        <h3 class="settings-subtitle">Codeforces хендл</h3>
+
+                        <div class="input-wrapper">
+                            <label for="profile-handle">Хендл на Codeforces</label>
+                            <div class="handle-input-row">
+                                <input type="text" id="profile-handle" placeholder="tourist" />
+                                <button class="btn btn-secondary" id="update-handle-btn">Сохранить</button>
+                            </div>
+                            <p class="hint">Используется для запросов к API Codeforces</p>
+                        </div>
+                        <div id="handle-status" class="handle-status" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <!-- API KEYS -->
+                <div class="account-section-block">
+                    <div class="api-box">
+                        <h3 class="settings-subtitle">API ключи Codeforces</h3>
+
+                        <div class="input-wrapper">
+                            <label>API Key</label>
+                            <input type="text" id="api-key" autocomplete="off" />
+                        </div>
+                        <div class="input-wrapper">
+                            <label>API Secret</label>
+                            <input type="password" id="api-secret" autocomplete="off" />
+                        </div>
+
+                        <div class="api-hint-box">
+                            <div class="hint-text">
+                                Получить ключи можно здесь: <br>
+                                <strong>Codeforces → Profile → Settings → API</strong> <br>
+                                <a href="https://codeforces.com/settings/api" target="_blank" rel="noopener noreferrer"
+                                    class="api-link">
+                                    Открыть страницу с ключами ↗
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="storage-selector">
+                            <label class="storage-option">
+                                <input type="radio" name="storage-mode" value="local" checked>
+                                <div>
+                                    <div class="storage-title">Сохранить в браузере</div>
+                                    <div class="storage-description">Ключи не передаются на сервер, хранятся локально
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="storage-option">
+                                <input type="radio" name="storage-mode" value="session">
+                                <div>
+                                    <div class="storage-title">Запомнить только на эту сессию</div>
+                                    <div class="storage-description">После закрытия вкладки ключи будут удалены</div>
+                                </div>
+                            </label>
+                        </div>
+                        <button class="btn btn-primary btn-wide" id="save-keys-btn">Сохранить</button>
+                    </div>
+                </div>
+
+                <!-- ACTIONS -->
+                <div class="account-section-block">
+                    <div class="account-actions">
+                        <button class="btn btn-secondary" id="logout-btn">Выйти</button>
+                        <button class="btn btn-danger" id="delete-account-btn">Удалить аккаунт</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FOOTER -->
+        <div class="modal-footer" id="modal-message"></div>
+    </div>
+</div>

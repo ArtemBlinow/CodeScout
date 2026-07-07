@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Build output
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database (секреты пользователей!)
+data/accounts.db
+data/*.db
+
+# Кэш данных
+data/gyms.json
+workouts/gyms/
+workouts/gyms.json
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Misc
+*.tgz
+coverage/

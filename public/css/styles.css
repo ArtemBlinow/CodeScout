@@ -1,0 +1,652 @@
+/* ============================================
+   CLEAN UI SYSTEM (CF + MODERN DEVTOOLS STYLE)
+   ============================================ */
+
+/* ---------- VARIABLES ---------- */
+:root {
+    /* background */
+    --bg: #f6f8fc;
+    --surface: #ffffff;
+    --surface-2: #f1f5fb;
+    --border: rgba(15, 23, 42, 0.08);
+
+    /* text */
+    --text: #0f172a;
+    --text-muted: #64748b;
+
+    /* accent */
+    --cf-blue: #3b82f6;
+    --cf-green: #22c55e;
+    --cf-red: #ef4444;
+    --cf-orange: #f59e0b;
+
+    /* radius */
+    --r-sm: 10px;
+    --r-md: 14px;
+    --r-lg: 18px;
+
+    /* spacing */
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 20px;
+    --spacing-lg: 28px;
+
+    /* shadow */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+    --ease: 180ms ease;
+}
+
+/* ---------- DARK ---------- */
+[data-theme="dark"] {
+    --bg: #0b1220;
+    --surface: #0f172a;
+    --surface-2: #111c33;
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #e5e7eb;
+    --text-muted: #94a3b8;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- BASE ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px;
+    transition: background var(--ease), color var(--ease);
+    display: flex;
+    justify-content: center;
+}
+
+/* ---------- LAYOUT ---------- */
+.container {
+    width: 100%;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* ---------- HEADER ---------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
+}
+
+/* ---------- CARDS ---------- */
+.section-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--ease), border-color var(--ease);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.section-card:hover {
+    border-color: rgba(59, 130, 246, 0.2);
+    box-shadow: var(--shadow-md);
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 650;
+    margin: 0;
+}
+
+.section-hidden {
+    display: none;
+}
+
+/* ---------- TOGGLE GROUP ---------- */
+.toggle-group {
+    display: flex;
+    gap: var(--spacing-xs);
+    background: var(--surface-2);
+    padding: 4px;
+    border-radius: var(--r-sm);
+    width: fit-content;
+}
+
+.toggle-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--ease);
+}
+
+.toggle-btn.active {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ---------- FIELD ROW ---------- */
+.field-row {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--spacing-sm);
+}
+
+/* ---------- INPUTS ---------- */
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.input-wrapper label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.input-wrapper input,
+.input-wrapper select {
+    padding: 10px 12px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    outline: none;
+    font-size: 14px;
+    transition: border var(--ease), box-shadow var(--ease);
+}
+
+.input-wrapper input:focus,
+.input-wrapper select:focus {
+    border-color: var(--cf-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.hint {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* ---------- GYM INFO ---------- */
+.gym-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface-2);
+    padding: 8px 12px;
+    border-radius: var(--r-sm);
+    font-size: 14px;
+}
+
+.gym-link {
+    text-decoration: none;
+    color: var(--cf-blue);
+    font-weight: 500;
+    transition: opacity var(--ease);
+}
+
+.gym-link:hover {
+    opacity: 0.8;
+}
+
+/* ---------- SETTINGS GRID ---------- */
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+/* ---------- BUTTONS ---------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 14px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all var(--ease);
+    white-space: nowrap;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+    background: var(--cf-blue);
+    border: none;
+    color: white;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.05);
+}
+
+.btn-secondary {
+    background: var(--surface);
+}
+
+.btn-danger {
+    background: var(--cf-red);
+    border: none;
+    color: white;
+}
+
+.btn-random {
+    background: var(--surface-2);
+    font-weight: 500;
+}
+
+.btn-wide {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    margin-top: var(--spacing-xs);
+}
+
+/* ---------- RESULT CARD ---------- */
+.result-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.result-title {
+    font-weight: 650;
+    margin-bottom: var(--spacing-sm);
+    font-size: 18px;
+}
+
+/* ---------- MODAL ---------- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal {
+    width: 92%;
+    max-width: 460px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0;
+}
+
+.modal-header h2 {
+    font-size: 18px;
+    font-weight: 650;
+    margin: 0;
+}
+
+.modal-close {
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color var(--ease);
+    line-height: 1;
+    padding: 4px;
+}
+
+.modal-close:hover {
+    color: var(--text);
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ---------- TABS ---------- */
+.modal-tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 0;
+}
+
+.modal-tab {
+    background: transparent;
+    border: none;
+    padding: 6px 10px;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all var(--ease);
+}
+
+.modal-tab.active {
+    color: var(--cf-blue);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+/* ---------- ACCOUNT CARD ---------- */
+.account-card {
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    background: var(--surface-2);
+}
+
+.account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.account-name {
+    font-weight: 650;
+    font-size: 16px;
+}
+
+.account-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    background: var(--surface);
+    white-space: nowrap;
+}
+
+.status-ok {
+    color: var(--cf-green);
+}
+
+.status-no {
+    color: var(--cf-red);
+}
+
+/* ---------- PROFILE SETTINGS ---------- */
+.profile-settings {
+    background: var(--surface-2);
+    padding: 14px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.settings-subtitle {
+    font-size: 14px;
+    font-weight: 650;
+    color: var(--text);
+    margin: 0;
+}
+
+.handle-input-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+}
+
+.handle-input-row input {
+    flex: 1;
+}
+
+.handle-input-row .btn {
+    white-space: nowrap;
+    padding: 10px 16px;
+    height: 42px;
+}
+
+.handle-status {
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: var(--r-sm);
+    margin: 0;
+    min-height: 20px;
+}
+
+.handle-status.success {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--cf-green);
+}
+
+.handle-status.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--cf-red);
+}
+
+/* ---------- API BOX ---------- */
+.api-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--surface-2);
+    padding: 14px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--border);
+}
+
+.api-hint-box {
+    display: flex;
+    gap: 10px;
+    background: rgba(59, 130, 246, 0.05);
+    padding: 10px 12px;
+    border-radius: var(--r-sm);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.hint-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.api-link {
+    color: var(--cf-blue);
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.api-link:hover {
+    text-decoration: underline;
+}
+
+/* ---------- STORAGE SELECTOR ---------- */
+.storage-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.storage-option {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    transition: 0.2s;
+    background: var(--surface);
+}
+
+.storage-option:hover {
+    border-color: var(--cf-blue);
+}
+
+.storage-option input {
+    margin-top: 3px;
+    accent-color: var(--cf-blue);
+    flex-shrink: 0;
+}
+
+.storage-title {
+    font-weight: 600;
+    margin-bottom: 2px;
+    font-size: 14px;
+}
+
+.storage-description {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* ---------- ACCOUNT ACTIONS ---------- */
+.account-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.account-actions .btn {
+    flex: 1;
+    padding: 10px 14px;
+    font-size: 14px;
+    justify-content: center;
+}
+
+/* ---------- MESSAGE ---------- */
+.modal-footer {
+    font-size: 13px;
+    min-height: 20px;
+    text-align: center;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: var(--r-sm);
+    transition: all var(--ease);
+    margin: 0;
+}
+
+.modal-footer.success {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--cf-green);
+}
+
+.modal-footer.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--cf-red);
+}
+
+.modal-footer:empty {
+    padding: 0;
+    min-height: 0;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 600px) {
+    body {
+        padding: 14px;
+    }
+
+    .modal {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .field-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    .account-actions {
+        flex-direction: column;
+    }
+}
+
+/* ---------- ACCOUNT SECTION BLOCK ---------- */
+.account-section-block {
+    padding: 3px 0;
+}
+
+.account-section-block:first-child {
+    padding-top: 0;
+}
+
+.account-section-block:last-child {
+    padding-bottom: 0;
+}
+
+/* ---------- FORM FIELDS ---------- */
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-fields .btn-wide {
+    margin-top: 4px;
+}
