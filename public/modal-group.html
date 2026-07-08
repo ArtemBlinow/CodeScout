@@ -1,0 +1,55 @@
+<div class="gm-modal-overlay" id="group-modal-overlay" style="display:none">
+    <div class="gm-modal">
+        <div class="modal-header">
+            <h3 id="group-modal-title">Создать группу</h3>
+            <button class="modal-close" id="group-modal-close">&times;</button>
+        </div>
+        <div class="gm-modal-body">
+            <div>
+                <div class="input-wrapper">
+                    <label>Название группы</label>
+                    <input type="text" id="group-name" placeholder="Например: МГУ тренировки 2024" />
+                </div>
+                <div class="input-wrapper">
+                    <label>Описание</label>
+                    <input type="text" id="group-description" placeholder="Краткое описание" />
+                </div>
+            </div>
+
+            <div class="gm-access-row" id="group-created-row" style="display:none">
+                <span class="gm-label">Создана</span>
+                <span class="gm-value" id="group-created-at"></span>
+            </div>
+            <div class="gm-access-row" id="group-link-row-wrapper" style="display:none">
+                <span class="gm-label">Ссылка</span>
+                <div class="gm-group-link-row" id="group-link-row">
+                    <a class="gm-group-public-link" id="group-public-link" href="#" target="_blank" rel="noopener"></a>
+                    <button class="gm-icon-btn" id="copy-group-link" title="Копировать">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <div class="gm-members-header">
+                    <span class="gm-members-title">Состав</span>
+                </div>
+                <div class="gm-group-orgs" id="group-orgs"></div>
+                <button class="gm-btn-add-org" id="add-org-btn">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    Вуз / школа
+                </button>
+            </div>
+        </div>
+
+        <div class="gm-modal-footer">
+            <div class="gm-footer-left">
+                <button class="btn btn-danger" id="group-delete-btn" style="display:none">Удалить</button>
+            </div>
+            <div class="gm-footer-right">
+                <button class="btn btn-secondary" id="cancel-btn">Отмена</button>
+                <button class="btn btn-primary" id="group-save-btn">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>

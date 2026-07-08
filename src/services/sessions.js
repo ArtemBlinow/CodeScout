@@ -1,49 +1,59 @@
 const crypto = require('crypto');
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
 
-// Постоянные сессии (логин/пароль)
-const sessions = new Map();
-
-// Временные сессии (API ключи, 1 час)
-const tempSessions = new Map();
+const DB_PATH = path.join(__dirname, '..', '..', 'data', 'accounts.db');
+const db = new sqlite3.Database(DB_PATH);
 
 const SESSION_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 дней
 const TEMP_SESSION_DURATION = 60 * 60 * 1000; // 1 час
 
+// Таблица для постоянных сессий
+db.run(`
+    CREATE TABLE IF NOT EXISTS sessions (
+        token TEXT PRIMARY KEY,
+        login TEXT NOT NULL,
+        created_at INTEGER NOT NULL
+    )
+`);
+
+// Временные сессии — в памяти (недолговечные)
+const tempSessions = new Map();
+
 function createSession(login) {
     const token = crypto.randomBytes(32).toString('hex');
-    sessions.set(token, {
-        login,
-        createdAt: Date.now()
-    });
+    db.run(
+        'INSERT INTO sessions (token, login, created_at) VALUES (?, ?, ?)',
+        [token, login, Date.now()]
+    );
     return token;
 }
 
 function getSession(token) {
-    const session = sessions.get(token);
-    if (!session) return null;
+    return new Promise((resolve) => {
+        db.get('SELECT * FROM sessions WHERE token = ?', [token], (err, row) => {
+            if (err || !row) return resolve(null);
 
-    if (Date.now() - session.createdAt > SESSION_DURATION) {
-        sessions.delete(token);
-        return null;
-    }
+            if (Date.now() - row.created_at > SESSION_DURATION) {
+                db.run('DELETE FROM sessions WHERE token = ?', [token]);
+                return resolve(null);
+            }
 
-    return session;
+            resolve({ login: row.login, createdAt: row.created_at });
+        });
+    });
 }
 
 function deleteSession(token) {
-    sessions.delete(token);
+    db.run('DELETE FROM sessions WHERE token = ?', [token]);
     tempSessions.delete(token);
 }
 
 function deleteAllSessions(login) {
-    for (const [token, session] of sessions) {
-        if (session.login === login) {
-            sessions.delete(token);
-        }
-    }
+    db.run('DELETE FROM sessions WHERE login = ?', [login]);
 }
 
-// ====== ВРЕМЕННЫЕ СЕССИИ ======
+// ====== ВРЕМЕННЫЕ СЕССИИ (в памяти) ======
 function createTempSession(handle, apiKey, apiSecret) {
     const token = crypto.randomBytes(32).toString('hex');
     tempSessions.set(token, {
@@ -53,7 +63,6 @@ function createTempSession(handle, apiKey, apiSecret) {
         createdAt: Date.now()
     });
 
-    // Автоочистка через 1 час
     setTimeout(() => {
         tempSessions.delete(token);
     }, TEMP_SESSION_DURATION);
@@ -73,21 +82,10 @@ function getTempSession(token) {
     return session;
 }
 
-// Очистка истекших сессий каждые 30 минут
+// Очистка истекших постоянных сессий каждые 30 минут
 setInterval(() => {
-    const now = Date.now();
-
-    for (const [token, session] of sessions) {
-        if (now - session.createdAt > SESSION_DURATION) {
-            sessions.delete(token);
-        }
-    }
-
-    for (const [token, session] of tempSessions) {
-        if (now - session.createdAt > TEMP_SESSION_DURATION) {
-            tempSessions.delete(token);
-        }
-    }
+    const cutoff = Date.now() - SESSION_DURATION;
+    db.run('DELETE FROM sessions WHERE created_at < ?', [cutoff]);
 }, 30 * 60 * 1000);
 
 module.exports = {

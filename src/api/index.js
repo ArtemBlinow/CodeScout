@@ -6,6 +6,7 @@ const accounts = require('../services/accounts');
 const sessions = require('../services/sessions');
 const cfApi = require('../services/cfApi');
 const { cache } = require('../services/cache');
+const groups = require('../services/groups');
 
 // ============================================================
 // ====== РЕГИСТРАЦИЯ ======
@@ -309,6 +310,103 @@ router.get('/gyms', authMiddleware, (req, res) => {
         total: gyms.length,
         gyms: gyms.slice(0, 100)
     });
+});
+
+// ============================================================
+// ====== ГРУППЫ ======
+// ============================================================
+
+// Получить группы текущего пользователя
+router.get('/groups', authMiddleware, async (req, res) => {
+    try {
+        const userGroups = await groups.getGroupsByOwner(req.account.login);
+        res.json({ groups: userGroups });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Создать группу
+router.post('/groups', authMiddleware, async (req, res) => {
+    const { name, description, members } = req.body;
+
+    if (!name || !name.trim()) {
+        return res.status(400).json({ error: 'Group name required' });
+    }
+
+    try {
+        const id = await groups.createGroup(name.trim(), description || '', req.account.login);
+        if (members && members.length > 0) {
+            await groups.setGroupMembers(id, members);
+        }
+        log('users', `Группа создана: "${name}" by ${req.account.login}`);
+        res.json({ success: true, id });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Обновить группу
+router.put('/groups/:id', authMiddleware, async (req, res) => {
+    const { id } = req.params;
+    const { name, description, members } = req.body;
+
+    try {
+        if (!(await groups.isOwner(id, req.account.login))) {
+            return res.status(403).json({ error: 'Not your group' });
+        }
+
+        if (name) await groups.updateGroup(id, name.trim(), description || '');
+        if (members) await groups.setGroupMembers(id, members);
+
+        log('users', `Группа id=${id} обновлена by ${req.account.login}`);
+        res.json({ success: true });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Удалить группу
+router.delete('/groups/:id', authMiddleware, async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        if (!(await groups.isOwner(id, req.account.login))) {
+            return res.status(403).json({ error: 'Not your group' });
+        }
+
+        await groups.deleteGroup(id);
+        log('users', `Группа id=${id} удалена by ${req.account.login}`);
+        res.json({ success: true });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Получить участников группы
+router.get('/groups/:id/members', authMiddleware, async (req, res) => {
+    try {
+        const members = await groups.getGroupMembers(req.params.id);
+        res.json({ members });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// ============================================================
+// ====== ПУБЛИЧНАЯ СТРАНИЦА ГРУППЫ ======
+// ============================================================
+router.get('/public/groups/:id', async (req, res) => {
+    try {
+        const group = await groups.getGroupById(req.params.id);
+        if (!group) {
+            return res.status(404).json({ error: 'Group not found' });
+        }
+        const members = await groups.getGroupMembers(req.params.id);
+        res.json({ group, members });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 module.exports = router;

@@ -16,9 +16,15 @@
 
     /* accent */
     --cf-blue: #3b82f6;
+    --cf-blue-dim: rgba(59,130,246,.09);
+    --cf-blue-strong: #1e40af;
     --cf-green: #22c55e;
     --cf-red: #ef4444;
+    --cf-red-dim: rgba(239,68,68,.09);
+    --cf-red-strong: #991b1b;
     --cf-orange: #f59e0b;
+    --cf-amber-bg: #fef3c7;
+    --cf-amber-text: #92400e;
 
     /* radius */
     --r-sm: 10px;
@@ -46,6 +52,12 @@
     --border: rgba(255, 255, 255, 0.08);
     --text: #e5e7eb;
     --text-muted: #94a3b8;
+    --cf-blue-dim: rgba(59,130,246,.15);
+    --cf-blue-strong: #60a5fa;
+    --cf-red-dim: rgba(239,68,68,.15);
+    --cf-red-strong: #fca5a5;
+    --cf-amber-bg: rgba(251,191,36,.15);
+    --cf-amber-text: #fbbf24;
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
     --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
@@ -85,11 +97,38 @@ body {
     margin-bottom: var(--spacing-xs);
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .page-title {
     font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.5px;
     color: var(--text);
+}
+
+/* ---------- ICON BUTTON ---------- */
+.btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    font-size: 18px;
+    transition: background var(--ease), border-color var(--ease);
+}
+
+.btn-icon:hover {
+    border-color: rgba(59, 130, 246, 0.3);
+    background: var(--surface-2);
 }
 
 /* ---------- CARDS ---------- */

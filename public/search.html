@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Поиск контестов Codeforces</title>
-    <link rel="icon" type="image/svg+xml" href="assetes/logo.svg">
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/findcontest.css">
 </head>
@@ -15,9 +15,48 @@
         <!-- ====== ШАПКА ====== -->
         <div class="header">
             <h1 class="page-title">Поиск контестов</h1>
-            <button class="btn btn-secondary" id="account-btn">
-                <span>👤</span> Аккаунт
-            </button>
+            <div class="header-actions">
+                <button class="btn btn-icon" id="theme-toggle" title="Сменить тему">🌙</button>
+                <button class="btn btn-secondary" id="account-btn">
+                    <span>👤</span> Аккаунт
+                </button>
+            </div>
+        </div>
+
+        <!-- ====== РЕЖИМ ПОИСКА ====== -->
+        <div class="section-card">
+            <h2 class="section-title">Режим поиска</h2>
+            <div class="toggle-group" id="search-mode">
+                <button class="toggle-btn active" data-value="individual">Индивидуальный</button>
+                <button class="toggle-btn" data-value="team">Командный</button>
+                <button class="toggle-btn" data-value="group">Групповой</button>
+            </div>
+            <div class="individual-panel" id="individual-panel">
+                <div class="input-wrapper">
+                    <input type="text" id="individual-handle" placeholder="tourist" />
+                </div>
+            </div>
+            <div class="team-search-panel" id="team-search-panel" style="display: none;">
+                <div class="input-wrapper">
+                    <input type="text" id="team-handles"
+                           placeholder="+anotherworld, -Artem_Sukharev, +Honerad, ashmelev" />
+                    <div class="team-hint">
+                        <code>+хэндл</code> — будет писать сейчас<br>
+                        <code>-хэндл</code> — не будет писать сейчас<br>
+                        Без знака — тоже будет писать, но не столь критично, чтобы он видел контест впервые
+                    </div>
+                </div>
+            </div>
+            <div class="group-selector" id="group-selector" style="display: none;">
+                <div class="group-selected" id="group-selected" style="display: none;">
+                    <span class="group-selected-name" id="group-selected-name"></span>
+                    <button class="btn btn-secondary btn-sm" id="change-group-btn">Сменить</button>
+                </div>
+                <div class="group-list" id="group-list">
+                    <div class="group-list-items" id="group-list-items"></div>
+                    <button class="btn btn-secondary btn-wide" id="create-group-btn">Создать группу</button>
+                </div>
+            </div>
         </div>
 
         <!-- ====== ФОРМАТ (ICPC / IOI) ====== -->
@@ -51,6 +90,7 @@
                     </div>
                     <input type="range" id="difficulty-slider" min="1" max="5" value="3" step="1"
                         class="range-slider stars-slider" />
+                    <div class="star-description" id="star-description"></div>
                 </div>
             </div>
 
@@ -58,14 +98,13 @@
             <div class="scale-panel" id="scale-relative" style="display: none;">
                 <div class="range-container">
                     <div class="range-labels relative-labels">
-                        <span>Изи</span>
-                        <span></span>
+                        <span>Проще некуда</span>
                         <span>Золотая середина</span>
-                        <span></span>
-                        <span>Гробы</span>
+                        <span>Раскрой в себе красного</span>
                     </div>
-                    <input type="range" id="relative-slider" min="1" max="30" value="15" step="1"
+                    <input type="range" id="relative-slider" min="1" max="29" value="15" step="1"
                         class="range-slider relative-slider" />
+                    <div class="star-description" id="relative-description"></div>
                 </div>
             </div>
         </div>
@@ -122,7 +161,7 @@
 
         <!-- ====== КНОПКА ====== -->
         <button class="btn btn-primary btn-wide" id="search-contests-btn">
-            <span>🔍</span> Найти контесты
+            Поиск
         </button>
 
         <!-- ====== РЕЗУЛЬТАТЫ ====== -->
@@ -131,8 +170,9 @@
         </div>
     </div>
 
-    <!-- Плейсхолдер для модалки -->
+    <!-- Плейсхолдер для модалок -->
     <div id="modal-placeholder"></div>
+    <div id="group-modal-placeholder"></div>
 
     <!-- ====== СКРИПТЫ ====== -->
     <script src="/js/common.js"></script>

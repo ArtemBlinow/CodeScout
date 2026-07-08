@@ -6,7 +6,6 @@ const path = require('path');
 const apiRoutes = require('./api');
 const { initializeCache } = require('./services/cache');
 const { log } = require('./services/logger');
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -20,11 +19,15 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'findcontest.html'));
+    res.sendFile(path.join(__dirname, '..', 'public', 'search.html'));
 });
 
 app.get('/search', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'findcontest.html'));
+    res.sendFile(path.join(__dirname, '..', 'public', 'search.html'));
+});
+
+app.get('/group/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'team.html'));
 });
 
 app.use('/api', apiRoutes);
